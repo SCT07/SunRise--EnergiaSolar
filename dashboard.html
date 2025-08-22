@@ -17,12 +17,24 @@
             --color-light-beige: #f5eddc;
         }
 
+        /* Botón Flask */
         body {
             background: var(--color-green);
             color: var(--color-brown);
             font-family: Arial, sans-serif;
         }
 
+        .btn-orange {
+            background-color: #FF8C00;
+            border-color: #FF8C00;
+            color: white;
+        }
+
+        .btn-orange:hover {
+            background-color: #FF7F00;
+            border-color: #FF7F00;
+            color: white;
+        }
 
         /* Navbar */
         .navbar-dark {
@@ -469,8 +481,9 @@
             <!-- Análisis Estadístico para Colombia -->
             <div class="chart-container">
                 <div class="chart-title text-center"><strong>📊 Análisis Estadístico - Colombia</strong></div>
-                <div class="chart-desc">Estadísticas descriptivas de la generación solar en Colombia desde 1980 hasta 2024, incluyendo medidas de tendencia central, dispersión y distribución.</div>
-                
+                <div class="chart-desc">Estadísticas descriptivas de la generación solar en Colombia desde 1980 hasta
+                    2024, incluyendo medidas de tendencia central, dispersión y distribución.</div>
+
                 <div class="stats-grid mb-4">
                     <div class="stat-card">
                         <div class="label">Medidas de Tendencia Central</div>
@@ -518,15 +531,26 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="statistical-chart" class="chart"></div>
                 <div class="chart-analysis">
-                    <strong>Análisis:</strong> El análisis estadístico de la generación solar en Colombia muestra un crecimiento exponencial con una media de 859.78 GWh. La desviación estándar de 1072.11 GWh indica una alta variabilidad, reflejando el rápido crecimiento del sector. El rango intercuartílico de 1779.40 GWh demuestra la dispersión del 50% central de los datos, mientras que el percentil 90 (2416.02 GWh) indica que solo el 10% de los años superaron este valor. Estos resultados confirman la transformación energética de Colombia, que pasó de generación marginal en los 80s a ser un actor significativo en energías renovables.
+                    <strong>Análisis:</strong> El análisis estadístico de la generación solar en Colombia muestra un
+                    crecimiento exponencial con una media de 859.78 GWh. La desviación estándar de 1072.11 GWh indica
+                    una alta variabilidad, reflejando el rápido crecimiento del sector. El rango intercuartílico de
+                    1779.40 GWh demuestra la dispersión del 50% central de los datos, mientras que el percentil 90
+                    (2416.02 GWh) indica que solo el 10% de los años superaron este valor. Estos resultados confirman la
+                    transformación energética de Colombia, que pasó de generación marginal en los 80s a ser un actor
+                    significativo en energías renovables.
+                </div>
+
+                <div class="container text-center" style="margin-top: 10px;">
+                    <a href="flask.html" class="btn btn-orange">Descubre más sobre la Energía Solar en Colombia</a>
                 </div>
             </div>
 
+
             <!-- Mapa Mundial -->
-            <div class="chart-container">
+            <div class="chart-container" style="margin-top:30px;">
                 <div class="chart-title text-center"><strong>🗺️ Mapa Mundial — Generación Solar (TWh)</strong></div>
                 <div class="chart-desc">Distribución geográfica de la generación de energía solar a nivel mundial. Los
                     tonos más oscuros indican mayor generación solar, mostrando las regiones con mayor implementación de

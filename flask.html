@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficos sobre Energía Solar en Colombia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        :root {
+            --color-brown: #523C39;
+            --color-green: #588A50;
+            --color-orange: #F69845;
+            --color-beige: #E6D396;
+            --color-light-beige: #f5eddc;
+        }
+
+        body {
+            background: var(--color-green);
+            color: var(--color-brown);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar */
+        .navbar-dark {
+            background-color: var(--color-brown) !important;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--color-beige) !important;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            color: var(--color-beige) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--color-orange) !important;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--color-orange) !important;
+            font-weight: 600;
+        }
+
+        .dropdown-menu {
+            background-color: var(--color-brown);
+            border: 1px solid var(--color-beige);
+        }
+
+        .dropdown-item {
+            color: var(--color-beige);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--color-orange);
+            color: var(--color-brown);
+        }
+
+        .btn-outline-light {
+            color: var(--color-beige);
+            border-color: var(--color-beige);
+        }
+
+        .btn-outline-light:hover {
+            background-color: var(--color-beige);
+            color: var(--color-brown);
+        }
+
+        .navbar-toggler {
+            border-color: rgba(230, 211, 150, 0.5);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28230, 211, 150, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Estilos para los botones del navbar */
+        .btn-outline-light.nav-btn {
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light.nav-btn:hover {
+            background-color: rgba(230, 211, 150, 0.2) !important;
+            color: var(--color-orange) !important;
+            border-color: var(--color-orange);
+        }
+
+        /* Main */
+        .container-main {
+            max-width: 1200px;
+            margin: 18px auto;
+            padding: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 18px;
+            color: var(--color-brown);
+        }
+
+
+        /* Chart */
+        .grid-two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 980px) {
+            .grid-two {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart {
+            width: 100%;
+            height: 400px;
+        }
+
+        .chart-container {
+            background: var(--color-light-beige);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .chart-title {
+            font-weight: 600;
+            color: var(--color-brown);
+            margin-bottom: 10px;
+        }
+
+        .chart-desc {
+            font-size: 0.9rem;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .chart-analysis {
+            font-size: 1rem;
+            color: #000;
+            background-color: rgba(88, 138, 80, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        /* Estilos para imágenes */
+        .chart-img-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .chart-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        /* Footer */
+        .footer-custom {
+            background-color: #523C39;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--color-beige);
+            border-top: 2px solid var(--color-orange);
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .footer-custom img {
+            height: 24px;
+            vertical-align: middle;
+            margin: 0 8px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            margin-top: 10px;
+        }
+
+        .footer-links a {
+            color: var(--color-beige);
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /*Sources - Citación de fuentes del contenido*/
+        .sources-section {
+            background: var(--color-light-beige);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .sources-title {
+            color: var(--color-brown);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .source-item {
+            font-size: 0.9rem;
+            color: #000;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/logo.png" alt="Sun Rise Logo" class="d-inline-block align-text-top me-2 logo-img">
+                <span class="brand-text">Sun Rise</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="historia.html">Historia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="datos.html">Datos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Utilidades
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="analisis.html">Calculadora anual KW</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Calculadora instalación paneles</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Paises líderes</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Costos</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" action="buscar.html" method="get">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-light me-2 nav-btn" type="submit">Buscar</button>
+                    <a href="dashboard.html" class="btn btn-outline-light nav-btn">Dashboard</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor general -->
+    <main class="container-main" role="main">
+
+        <!-- Título -->
+        <div class="container-content p-4 rounded"
+            style="margin-top:30px; margin-bottom:30px; background-color:#E6D396; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+
+            <h3 class="mb-0 text-center"><strong>Análisis de Generación Solar en Colombia (1980-2024)</strong></h3>
+
+            <!-- Generación Solar Colombia -->
+            <div class="chart-container" style="margin-top:30px; margin-bottom:30px;">
+                <div class="chart-title text-center"><strong>📈 Generación Solar Colombia</strong></div>
+                <div class="chart-desc">Este gráfico muestra el análisis descriptivo de la generación de energía solar
+                    en Colombia desde 1980 hasta 2024. Incluye dos visualizaciones principales:</div>
+                <div class="chart-desc"><strong>Evolución Temporal:</strong> Muestra la tendencia histórica de la
+                    generación
+                    solar a lo largo del tiempo, con una línea de tendencia que indica el patrón de crecimiento. Se
+                    observa un
+                    crecimiento exponencial especialmente notable a partir de 2010.</div>
+                <div class="chart-desc"><strong>Distribución de Frecuencias:</strong> Presenta un histograma que muestra
+                    cómo se
+                    distribuyen los valores de generación solar, con indicadores de media y mediana. La distribución
+                    muestra una
+                    asimetría positiva, indicando que la mayoría de los valores están por debajo del promedio, con
+                    algunos valores
+                    muy altos que elevan la media.</div>
+                <div class="chart-img-container">
+                    <img src="figura1_analisis_descriptivo.png" class="chart-img">
+                </div>
+                <div class="chart-analysis">
+                    <strong>Análisis:</strong> El análisis revela varios patrones importantes en la generación solar
+                    colombiana:
+                    <ul class="analysis-points">
+                        <li>La generación solar mantuvo niveles mínimos hasta aproximadamente 2010, cuando comenzó un
+                            crecimiento acelerado</li>
+                        <li>La mediana es significativamente menor que la media, confirmando la asimetría positiva de la
+                            distribución</li>
+                        <li>El crecimiento post-2010 coincide con políticas de incentivo a las energías renovables en
+                            Colombia</li>
+                        <li>La tendencia lineal muestra una pendiente positiva pronunciada, indicando un crecimiento
+                            sostenido</li>
+                        <li>Los valores atípicos en años recientes reflejan proyectos de gran escala que han
+                            incrementado sustancialmente la capacidad instalada</li>
+                        <li>La brecha entre media y mediana sugiere que pocos proyectos de gran escala contribuyen
+                            desproporcionadamente a la generación total</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Distribución y Proyecciones -->
+            <div class="chart-container">
+                <div class="chart-title text-center"><strong>📊 Distribución y Proyecciones de la Energía Solar en
+                        Colombia</strong></div>
+                <div class="chart-desc">Este gráfico presenta dos visualizaciones complementarias para el análisis de la
+                    generación
+                    solar en Colombia:</div>
+                <div class="chart-desc"><strong>Diagrama de Caja:</strong> Muestra la distribución estadística de los
+                    datos
+                    de generación solar a través de un diagrama de caja y bigotes. Este gráfico permite visualizar la
+                    mediana, los cuartiles y
+                    los valores atípicos de la serie histórica.</div>
+                <div class="chart-desc"><strong>Proyecciones Futuras:</strong> Presenta proyecciones de generación solar
+                    para el
+                    período 2025-2029 basadas en dos modelos diferentes, proyección exponencial y proyección lineal,
+                    comparadas con los
+                    datos históricos.</div>
+                <div class="chart-img-container">
+                    <img src="figura2_distribucion_proyecciones.png" class="chart-img">
+                </div>
+                <div class="chart-analysis">
+                    <strong>Análisis:</strong>El análisis de distribución y proyecciones revela insights importantes:
+                    <ul class="analysis-points">
+                        <li>El diagrama de caja muestra una distribución con varios valores atípicos en el extremo
+                            superior, confirmando el crecimiento acelerado reciente</li>
+                        <li>La mediana se encuentra en la parte inferior de la caja, indicando una distribución sesgada
+                            hacia valores bajos con algunos valores muy altos</li>
+                        <li>Las proyecciones exponenciales sugieren un crecimiento más acelerado que las lineales,
+                            basándose en la tendencia reciente</li>
+                        <li>Ambos modelos proyectan un crecimiento continuo, aunque con diferentes trayectorias e
+                            implicaciones para la planificación energética</li>
+                        <li>La brecha entre proyecciones lineales y exponenciales sugiere incertidumbre en la tasa de
+                            adopción futura de energía solar</li>
+                        <li>El modelo exponencial asume una aceleración continua del crecimiento, posiblemente impulsada
+                            por disminución de costos y políticas favorables</li>
+                        <li>El modelo lineal representa un escenario más conservador, extrapolando la tendencia
+                            histórica sin aceleración adicional</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Comparativa y Mapa -->
+            <section class="grid-two" style="margin-bottom:20px;">
+                <div class="chart-container">
+                    <div class="chart-title text-center"><strong>🌍 Comparativa Internacional de Generación Solar
+                            2024</strong></div>
+                    <div class="chart-desc">Este gráfico de barras horizontales presenta la comparación de la generación
+                        de energía solar entre 11 países,
+                        incluyendo Colombia, para el año 2024. Utiliza una escala en Teravatios-hora (TWh) que permite
+                        visualizar las enormes diferencias en
+                        la capacidad de generación entre naciones.</div>
+                    <div class="chart-img-container">
+                        <img src="figura3_comparativa_internacional.png" class="chart-img">
+                    </div>
+                    <div class="chart-analysis">
+                        <strong>Análisis:</strong> El gráfico de comparativa internacional revela la posición aún
+                        incipiente de Colombia en el panorama global de generación de energía
+                        solar. Con apenas 4.9 TWh, el país se ubica en el último lugar entre las once naciones
+                        representadas, mostrando una brecha significativa frente a los líderes mundiales. China domina
+                        abrumadoramente el sector con 392.5 TWh, seguida por Estados Unidos con 164.2 TWh e India con
+                        95.4 TWh. Esta comparativa evidencia que Colombia representa apenas el 1.2% de la generación
+                        china, el 3% de la estadounidense y el 5% de la india, lo que refleja el largo camino por
+                        recorrer en materia de desarrollo de infraestructura solar.
+
+                        La nota destacada que menciona "Colombia: Creciendo rápidamente" sugiere que, a pesar de la
+                        posición actual, el país está experimentando una trayectoria de crecimiento acelerado. Este dato
+                        contextual es crucial, pues indica que aunque la base de generación es todavía modesta en
+                        términos absolutos, la tasa de expansión del sector solar colombiano podría estar entre las más
+                        dinámicas de la región. La presencia de países como España (23.7 TWh) y Australia (29.5 TWh) en
+                        rangos medios muestra que naciones con características similares a Colombia han alcanzado
+                        niveles significativos de generación, sirviendo como referentes alcanzables para el desarrollo
+                        futuro.
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title text-center"><strong>🗺️ Mapa de Radiación Solar por Región
+                            Colombiana</strong></div>
+                    <div class="chart-desc">Este gráfico de barras presenta la radiación solar promedio en las
+                        principales regiones de Colombia, medida en kWh/m²/día.</div>
+                    <div class="chart-img-container">
+                        <img src="figura4_mapa_radiacion.png" class="chart-img">
+                    </div>
+                    <div class="chart-analysis">
+                        <strong>Análisis:</strong> El mapa de radiación solar por regiones colombianas presenta una
+                        oportunidad estratégica fundamental para el desarrollo energético del país. La Región Caribe
+                        emerge como el epicentro del potencial solar nacional con 5.8 kWh/m²/día, seguida por la
+                        Orinoquía (5.5 kWh/m²/día) y la Región Andina (5.2 kWh/m²/día). Estos valores de radiación son
+                        excepcionalmente favorables, superando el promedio global y ubicando a Colombia entre los países
+                        con mayor potencial solar en Latinoamérica.
+
+                        La distribución geográfica de la radiación solar muestra que el país cuenta con ventajas
+                        naturales significativas, particularmente en las regiones norte y oriental. El hecho de que la
+                        Región Caribe, tradicionalmente menos desarrollada industrialmente, posea el mayor potencial
+                        solar crea una oportunidad única para descentralizar la generación energética y promover
+                        desarrollo económico regional. La Amazonía, con 4.8 kWh/m²/día, aunque con el valor más bajo,
+                        todavía mantiene niveles adecuados para proyectos de electrificación rural y sistemas autónomos,
+                        cruciales para esta región de difícil acceso a la red eléctrica convencional.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fuentes -->
+            <div class="sources-section">
+                <h5 class="sources-title"><strong>📚 Fuentes de Información</strong></h5>
+                <p class="source-item">International Energy Agency. (2024). <i>World Energy Outlook 2023</i>.
+                    https://www.iea.org/reports/world-energy-outlook-2023</p>
+                <p class="source-item">International Renewable Energy Agency. (2024). <i>Renewable Capacity Statistics
+                        2024</i>. https://www.irena.org/Publications/2024/Mar/Renewable-capacity-statistics-2024</p>
+                <p class="source-item">BP. (2023). <i>Statistical Review of World Energy 2023</i>.
+                    https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html</p>
+                <p class="source-item">Ritchie, H., Roser, M., & Rosado, P. (2022). <i>Renewable Energy</i>. Our World
+                    in Data. https://ourworldindata.org/renewable-energy</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="footer-content">
+                <span>© 2025</span>
+                <img src="img/logo.png" alt="Ícono Footer">
+                <span>Sun Rise. Todos los derechos reservados.</span>
+            </div>
+            <div class="footer-links">
+                <a href="politica_privacidad.html" class="btn-outline-light nav-btn">Política de Privacidad</a>
+                <span>|</span>
+                <a href="terminos_servicio.html" class="btn-outline-light nav-btn">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
