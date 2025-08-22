@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Búsqueda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        /* Estilos específicos solo para buscar.html */
+        .buscar-page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .buscar-content {
+            flex: 1;
+            padding-top: 80px;
+            padding-bottom: 60px;
+        }
+
+        .buscar-navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1030;
+        }
+
+        .buscar-footer {
+            width: 100%;
+        }
+
+        .buscar-result-container {
+            background-color: var(--color-beige);
+            border: 2px solid var(--color-brown);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(82, 60, 57, 0.1);
+        }
+    </style>
+</head>
+
+<body class="buscar-page">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark buscar-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/logo.png" alt="Sun Rise Logo" class="d-inline-block align-text-top me-2 logo-img">
+                <span class="brand-text">Sun Rise</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="historia.html">Historia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="datos.html">Datos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Utilidades
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="analisis.html">Calculadora anual KW</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Calculadora instalación paneles</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Paises líderes</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Costos</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" action="buscar.html" method="get">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-light me-2 nav-btn" type="submit">Buscar</button>
+                    <a href="dashboard.html" class="btn btn-outline-light nav-btn">Dashboard</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="buscar-content">
+        <div class="container mt-4 mb-5">
+            <h1 class="mb-4 text-brown">Resultados de búsqueda</h1>
+            <div id="resultados" class="buscar-result-container p-4 p-lg-5"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom buscar-footer">
+        <div class="container">
+            <div class="footer-content">
+                <span>© 2025</span>
+                <img src="img/logo.png" alt="Ícono Footer">
+                <span>Sun Rise. Todos los derechos reservados.</span>
+            </div>
+            <div class="footer-links">
+                <a href="politica_privacidad.html" class="btn-outline-light nav-btn">Política de Privacidad</a>
+                <span>|</span>
+                <a href="terminos_servicio.html" class="btn-outline-light nav-btn">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get("q")?.toLowerCase() || "";
+
+        const paginas = [
+            { titulo: "Historia de la Energía Solar", url: "historia.html", descripcion: "Conoce los orígenes y evolución de la energía solar desde la antigüedad hasta hoy." },
+            { titulo: "Datos y Estadísticas", url: "datos.html", descripcion: "Explora cifras globales, tendencias y el impacto económico y ambiental de la energía solar." },
+            { titulo: "Calculadora Anual KW", url: "analisis.html", descripcion: "Calcula tu producción anual de energía solar." },
+            { titulo: "Dashboard Solar", url: "dashboard.html", descripcion: "Visualiza métricas y estadísticas de energía solar en tiempo real." }
+        ];
+
+        const resultadosDiv = document.getElementById("resultados");
+
+        const resultados = paginas.filter(p => p.titulo.toLowerCase().includes(query) || p.descripcion.toLowerCase().includes(query));
+
+        if (resultados.length > 0) {
+            resultados.forEach(pagina => {
+                const item = document.createElement("div");
+                item.className = "mb-4 pb-3 border-bottom border-light";
+                item.innerHTML = `
+                    <h5 class="text-brown fw-bold">${pagina.titulo}</h5>
+                    <p class="text-brown mb-3">${pagina.descripcion}</p>
+                    <a href="${pagina.url}" class="btn btn-orange">Ver más</a>
+                `;
+                resultadosDiv.appendChild(item);
+            });
+        } else {
+            resultadosDiv.innerHTML = `
+                <div class="text-center py-4">
+                    <i class="bi bi-search display-4 text-brown mb-3"></i>
+                    <h4 class="text-brown">No se encontraron resultados para "<strong>${query}</strong>"</h4>
+                    <p class="text-brown">Intenta con otros términos de búsqueda</p>
+                    <a href="index.html" class="btn btn-brown mt-3">Volver al inicio</a>
+                </div>
+            `;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

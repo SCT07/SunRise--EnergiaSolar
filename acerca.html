@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca del Proyecto - Sun Rise</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/logo.png" alt="Sun Rise Logo" class="d-inline-block align-text-top me-2 logo-img">
+                <span class="brand-text">Sun Rise</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="historia.html">Historia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="datos.html">Datos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Utilidades
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="analisis.html">Calculadora anual KW</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Calculadora instalación paneles</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Paises líderes</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Costos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="acerca.html">Acerca del Proyecto</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" action="buscar.html" method="get">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-light me-2 nav-btn" type="submit">Buscar</button>
+                    <a href="dashboard.html" class="btn btn-outline-light nav-btn">Dashboard</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+        <!-- Encabezado -->
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h1 class="fw-bold mb-3" style="color: var(--color-beige);">Acerca del Proyecto Sun Rise</h1>
+                <p class="lead text-beige">Conoce más sobre nuestra iniciativa para promover el uso de la energía solar
+                    a nivel global</p>
+            </div>
+        </div>
+
+        <!-- Título del Proyecto -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="nfobox">
+                    <div class="info-block mb-0">
+                        <div class="icon-box">
+                            <i class="bi bi-lightbulb-fill"></i>
+                        </div>
+                        <div>
+                            <h2 class="info-title mb-2">Título del Proyecto</h2>
+                            <p class="mb-0 fs-5">Aplicativo Web para la consulta de información del uso de la energía
+                                solar en el tiempo a nivel global.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objetivo General -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="nfobox">
+                    <h3 class="info-title mb-3"><i class="bi bi-bullseye me-2"></i>Objetivo General</h3>
+                    <p class="mb-0">Desarrollar un aplicativo Web para la consulta de información del uso de la energía
+                        solar en el tiempo a nivel global.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objetivos Específicos -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="nfobox">
+                    <h3 class="info-title mb-3"><i class="bi bi-list-check me-2"></i>Objetivos Específicos</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Estructurar la información de los datos históricos
+                            globales sobre el uso de la energía solar.</li>
+                        <li class="list-group-item bg-transparent">Analizar la información para detectar las posibles
+                            problemáticas que se estén presentando en el uso de esta energía.</li>
+                        <li class="list-group-item bg-transparent">Diseñar la estructura del Aplicativo Web
+                            (Construcción del Mock-up), además del diseño lógico de la aplicación.</li>
+                        <li class="list-group-item bg-transparent">Desarrollar el sistema utilizando Visual Studio Code
+                            (HTML, CSS, BOOTSTRAP, PYTHON) y CSV.</li>
+                        <li class="list-group-item bg-transparent">Realizar pruebas del aplicativo Web en general para
+                            verificar su eficiencia.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Planteamiento del Problema -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="nfobox">
+                    <h3 class="info-title mb-3"><i class="bi bi-question-circle me-2"></i>Planteamiento del Problema
+                    </h3>
+                    <p>A nivel global, el desconocimiento acerca del uso de la energía solar ha llevado a la población a
+                        considerar que el acceso a esta tecnología es casi imposible. Esto se debe a la falta de
+                        información sobre sus costos y a la incertidumbre respecto a su viabilidad de implementación en
+                        determinadas regiones.</p>
+                    <p>Además, existen zonas donde la adopción de ciertas fuentes energéticas se ve limitada debido a
+                        que las actividades industriales y económicas predominantes no son favorables desde el punto de
+                        vista político. Estas restricciones generan barreras adicionales para el desarrollo de un
+                        sistema energético sostenible, lo que plantea la siguiente interrogante: ¿Es posible una
+                        implementación sencilla de este tipo de energía?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipo de Trabajo -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="nfobox">
+                    <h3 class="info-title mb-3"><i class="bi bi-people-fill me-2"></i>Equipo de Trabajo</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent">Juan David Tovar Guzmán</li>
+                                <li class="list-group-item bg-transparent">Julio Andres Marin Marin</li>
+                                <li class="list-group-item bg-transparent">Osnaider Salgado Cuello</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent">Sofía Cortés Tabares</li>
+                                <li class="list-group-item bg-transparent">Wilson De Jesus Arango Jimenez</li>
+                                <li class="list-group-item bg-transparent">Yohana Vera Gómez</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Descripción del Proyecto -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="nfobox">
+                    <h3 class="info-title mb-3"><i class="bi bi-info-circle me-2"></i>Descripción del Proyecto</h3>
+                    <p>Sun Rise es una plataforma web diseñada para democratizar el acceso a información sobre energía
+                        solar a nivel global. Nuestro objetivo es proporcionar datos históricos, análisis de viabilidad
+                        y herramientas interactivas que permitan a usuarios, comunidades y empresas tomar decisiones
+                        informadas sobre la implementación de sistemas de energía solar.</p>
+                    <p>El proyecto busca superar las barreras de desconocimiento y desinformación que actualmente
+                        limitan la adopción masiva de esta tecnología renovable, ofreciendo datos confiables,
+                        calculadoras de costos y análisis personalizados según la ubicación y necesidades específicas de
+                        cada usuario.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Volver al inicio -->
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <a href="index.html" class="btn btn-orange btn-lg">Volver al Inicio</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="footer-content">
+                <span>© 2025</span>
+                <img src="img/logo.png" alt="Ícono Footer">
+                <span>Sun Rise. Todos los derechos reservados.</span>
+            </div>
+            <div class="footer-links">
+                <a href="politica_privacidad.html" class="btn-outline-light nav-btn">Política de Privacidad</a>
+                <span>|</span>
+                <a href="terminos_servicio.html" class="btn-outline-light nav-btn">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

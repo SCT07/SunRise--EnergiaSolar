@@ -1,0 +1,553 @@
+/* Variables de color - Define colores personalizados para usar en todo el sitio */
+:root {
+    --color-brown: #523C39;
+    --color-green: #588A50;
+    --color-orange: #F69845;
+    --color-beige: #E6D396;
+    --color-light-beige: #f5eddc;
+}
+
+/* Estilos generales del cuerpo de la página */
+body {
+    background: var(--color-green);
+    /* Fondo verde */
+    color: var(--color-brown);
+    /* Texto marrón */
+    font-family: Arial, sans-serif;
+    /* Fuente principal */
+}
+
+/* Navbar - Estilos para la barra de navegación */
+.navbar-dark {
+    background-color: var(--color-brown) !important;
+    /* Fondo marrón */
+    padding: 0.5rem 1rem;
+    /* Espaciado interno */
+}
+
+.navbar-brand {
+    font-weight: 600;
+    /* Grosor de fuente */
+    font-size: 1.5rem;
+    /* Tamaño de fuente */
+    color: var(--color-beige) !important;
+    /* Color beige */
+}
+
+.logo-img {
+    height: 40px;
+    /* Altura del logo */
+    width: auto;
+    /* Ancho automático */
+    transition: transform 0.3s ease;
+    /* Transición suave para hover */
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+    /* Efecto de escala al pasar el mouse */
+}
+
+.nav-link {
+    color: var(--color-beige) !important;
+    /* Color de enlaces */
+    font-weight: 500;
+    /* Grosor de fuente */
+    padding: 0.5rem 1rem;
+    /* Espaciado interno */
+    margin: 0 0.2rem;
+    /* Margen entre enlaces */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    transition: all 0.3s ease;
+    /* Transición suave para todos los cambios */
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: var(--color-orange) !important;
+    /* Color naranja al pasar mouse */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Fondo semi-transparente */
+}
+
+.nav-link.active {
+    color: var(--color-orange) !important;
+    /* Color naranja para enlace activo */
+    font-weight: 600;
+    /* Grosor de fuente aumentado */
+}
+
+.dropdown-menu {
+    background-color: var(--color-brown);
+    /* Fondo marrón para menú desplegable */
+    border: 1px solid var(--color-beige);
+    /* Borde beige */
+}
+
+.dropdown-item {
+    color: var(--color-beige);
+    /* Color de items del menú */
+}
+
+.dropdown-item:hover {
+    background-color: var(--color-orange);
+    /* Fondo naranja al pasar mouse */
+    color: var(--color-brown);
+    /* Texto marrón al pasar mouse */
+}
+
+.btn-outline-light {
+    color: var(--color-beige);
+    /* Color de texto */
+    border-color: var(--color-beige);
+    /* Color de borde */
+}
+
+.btn-outline-light:hover {
+    background-color: var(--color-beige);
+    /* Fondo beige al pasar mouse */
+    color: var(--color-brown);
+    /* Texto marrón al pasar mouse */
+}
+
+.navbar-toggler {
+    border-color: rgba(230, 211, 150, 0.5);
+    /* Color de borde del botón hamburguesa */
+}
+
+.navbar-toggler-icon {
+    /* SVG personalizado para el icono hamburguesa con color beige */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28230, 211, 150, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Carrusel - Estilos para el slider de imágenes */
+.carousel-custom {
+    max-height: 400px;
+    /* Altura máxima */
+    overflow: hidden;
+    /* Oculta el exceso de contenido */
+    box-shadow: 0 4px 8px rgba(82, 60, 57, 0.3);
+    /* Sombra */
+    border: 2px solid var(--color-brown);
+    /* Borde marrón */
+}
+
+.carousel-img {
+    object-fit: cover;
+    /* Ajusta la imagen para cubrir el contenedor */
+    height: 400px;
+    /* Altura fija */
+    width: 100%;
+    /* Ancho completo */
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: var(--color-brown);
+    /* Color de indicadores inactivos */
+    width: 12px;
+    /* Ancho */
+    height: 12px;
+    /* Alto */
+    border-radius: 50%;
+    /* Forma circular */
+    margin: 0 6px;
+    /* Margen entre indicadores */
+}
+
+.carousel-indicators .active {
+    background-color: var(--color-orange);
+    /* Color de indicador activo */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--color-brown);
+    /* Fondo de controles de navegación */
+    border-radius: 50%;
+    /* Forma circular */
+    width: 2.5rem;
+    /* Ancho */
+    height: 2.5rem;
+    /* Alto */
+    background-size: 1.5rem;
+    /* Tamaño del icono interno */
+    padding: 0.5rem;
+    /* Espaciado interno */
+    opacity: 0.9;
+    /* Opacidad */
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    background-color: var(--color-orange);
+    /* Color naranja al pasar mouse */
+}
+
+/* Sección de contenido */
+.bg-white {
+    background-color: var(--color-beige) !important;
+    /* Fondo beige (nombre engañoso) */
+    color: var(--color-brown);
+    /* Texto marrón */
+    padding-top: 10%;
+    /* Espaciado superior */
+}
+
+.centrado {
+    text-align: center;
+    /* Texto centrado */
+    vertical-align: middle;
+    /* Alineación vertical media */
+    padding-top: 40px;
+    /* Espaciado superior */
+    color: var(--color-beige);
+    /* Color beige */
+}
+
+#Sabias_que {
+    padding-top: 20%;
+    /* Espaciado superior específico */
+    color: var(--color-brown);
+    /* Color marrón */
+}
+
+.icon-box {
+    width: 54px;
+    /* Ancho fijo */
+    height: 54px;
+    /* Alto fijo */
+    background-color: var(--color-orange);
+    /* Fondo naranja */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    display: flex;
+    /* Flexbox para centrar contenido */
+    align-items: center;
+    /* Centrado vertical */
+    justify-content: center;
+    /* Centrado horizontal */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    flex-shrink: 0;
+    /* Evita que se encoja */
+    color: var(--color-brown);
+    /* Color marrón */
+}
+
+.info-block {
+    display: flex;
+    /* Flexbox para alinear icono y texto */
+    gap: 16px;
+    /* Espacio entre elementos */
+    margin-bottom: 24px;
+    /* Margen inferior */
+}
+
+.info-title {
+    font-weight: bold;
+    /* Texto en negrita */
+    color: var(--color-brown);
+    /* Color marrón */
+}
+
+/* Tarjetas */
+.nfobox {
+    background-color: var(--color-beige) !important;
+    /* Fondo beige */
+    color: var(--color-brown);
+    /* Texto marrón */
+    border-radius: 1rem;
+    /* Bordes muy redondeados */
+    padding: 40px 30px;
+    /* Espaciado interno */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+}
+
+.card {
+    background-color: var(--color-light-beige);
+    /* Fondo beige claro */
+    border: 1px solid var(--color-brown);
+    /* Borde marrón */
+}
+
+.card-title {
+    color: var(--color-brown);
+    /* Texto marrón */
+    font-weight: bold;
+    /* Negrita */
+}
+
+/* Formularios */
+.bg-beige {
+    background-color: var(--color-beige);
+    /* Fondo beige */
+}
+
+.text-brown {
+    color: var(--color-brown);
+    /* Texto marrón */
+}
+
+.text-beige {
+    color: var(--color-beige);
+    /* Texto beige */
+}
+
+.bg-light-brown {
+    background-color: var(--color-light-beige);
+    /* Fondo beige claro */
+}
+
+.btn-orange {
+    background-color: var(--color-orange);
+    /* Fondo naranja */
+    color: white;
+    /* Texto blanco */
+    border: none;
+    /* Sin borde */
+}
+
+.btn-orange:hover {
+    background-color: #e07e35;
+    /* Fondo naranja oscuro al pasar mouse */
+    color: white;
+    /* Texto blanco */
+}
+
+.btn-brown {
+    background-color: var(--color-brown);
+    /* Fondo marrón */
+    color: var(--color-beige);
+    /* Texto beige */
+}
+
+.btn-brown:hover {
+    background-color: #3a2b29;
+    /* Fondo marrón oscuro al pasar mouse */
+    color: var(--color-beige);
+    /* Texto beige */
+}
+
+.contenedorFormulario {
+    box-shadow: 0 2px 8px rgba(82, 60, 57, 0.1);
+    /* Sombra suave */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    padding: 25px;
+    /* Espaciado interno */
+    background-color: var(--color-beige);
+    /* Fondo beige */
+    border: 2px solid var(--color-brown);
+    /* Borde marrón */
+}
+
+.form-control {
+    border: 1px solid var(--color-brown);
+    /* Borde marrón para inputs */
+}
+
+.form-control:focus {
+    border-color: var(--color-orange);
+    /* Borde naranja al enfocar */
+    box-shadow: 0 0 0 0.25rem rgba(246, 152, 69, 0.25);
+    /* Sombra de enfoque naranja */
+}
+
+.descripcion_Forms {
+    margin-bottom: 1.5rem;
+    /* Margen inferior */
+}
+
+/* Footer */
+.footer-custom {
+    background-color: #523C39;
+    /* Fondo marrón (duplicado de variable) */
+    padding: 20px;
+    /* Espaciado interno */
+    font-size: 0.9rem;
+    /* Tamaño de fuente pequeño */
+    color: var(--color-beige);
+    /* Texto beige */
+    border-top: 2px solid var(--color-orange);
+    /* Borde superior naranja */
+    font-weight: 400;
+    /* Grosor de fuente normal */
+    text-align: center;
+    /* Texto centrado */
+}
+
+.footer-custom img {
+    height: 24px;
+    /* Altura de imagen pequeña */
+    vertical-align: middle;
+    /* Alineación vertical media */
+    margin: 0 8px;
+    /* Margen horizontal */
+}
+
+.footer-content {
+    display: flex;
+    /* Flexbox para alinear elementos en línea */
+    justify-content: center;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Centrado vertical */
+    flex-wrap: wrap;
+    /* Permite envolver en múltiples líneas */
+}
+
+.footer-links {
+    margin-top: 10px;
+    /* Margen superior */
+}
+
+.footer-links a {
+    color: var(--color-beige);
+    /* Color de enlaces beige */
+    margin: 0 10px;
+    /* Margen horizontal */
+    text-decoration: none;
+    /* Sin subrayado */
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+    /* Subrayado al pasar mouse */
+}
+
+/* Responsive para móviles - Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        /* Elementos en columna */
+    }
+
+    .footer-links a {
+        display: block;
+        /* Enlaces como bloques */
+        margin: 5px 0;
+        /* Margen vertical */
+    }
+}
+
+/* Responsive - Media queries para adaptabilidad */
+@media (max-width: 768px) {
+    .carousel-custom {
+        max-height: 300px;
+        /* Altura reducida en tablets */
+    }
+
+    .carousel-img {
+        height: 300px;
+        /* Altura de imagen reducida */
+    }
+
+    .row>div {
+        padding-bottom: 1.5rem;
+        /* Espaciado inferior para columnas */
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-custom {
+        max-height: 250px;
+        /* Altura más reducida en móviles */
+    }
+
+    .carousel-img {
+        height: 250px;
+        /* Altura de imagen más reducida */
+    }
+}
+
+/* Estilos específicos para el formulario de contacto */
+.contacto-contenedor {
+    max-width: 500px;
+    /* Ancho máximo */
+    margin: 2rem auto;
+    /* Margen y centrado */
+    padding: 1.5rem;
+    /* Espaciado interno */
+}
+
+.formulario-contacto {
+    width: 100%;
+    /* Ancho completo */
+}
+
+.formulario-contacto .form-control {
+    padding: 0.5rem 0.75rem;
+    /* Espaciado interno reducido */
+    font-size: 0.9rem;
+    /* Tamaño de fuente reducido */
+}
+
+.formulario-contacto label {
+    font-size: 0.9rem;
+    /* Tamaño de fuente reducido */
+    margin-bottom: 0.4rem;
+    /* Margen inferior reducido */
+}
+
+.formulario-contacto .btn-enviar {
+    padding: 0.5rem 1.5rem;
+    /* Espaciado interno */
+    font-size: 0.9rem;
+    /* Tamaño de fuente reducido */
+    margin-top: 0.5rem;
+    /* Margen superior */
+}
+
+@media (max-width: 576px) {
+    .contacto-contenedor {
+        padding: 1rem;
+        /* Espaciado interno reducido */
+        margin: 1rem auto;
+        /* Margen reducido */
+    }
+}
+
+/* Estilos para los botones del navbar */
+.btn-outline-light.nav-btn {
+    transition: all 0.3s ease;
+    /* Transición suave para todos los cambios */
+}
+
+.btn-outline-light.nav-btn:hover {
+    background-color: rgba(230, 211, 150, 0.2) !important;
+    /* Fondo semi-transparente al pasar mouse */
+    color: var(--color-orange) !important;
+    /* Texto naranja al pasar mouse */
+    border-color: var(--color-orange);
+    /* Borde naranja al pasar mouse */
+}
+
+/* Estilos para botones de cards personalizados */
+.btn-card-custom {
+    background-color: white !important;
+    /* Fondo blanco */
+    border: 2px solid var(--color-orange) !important;
+    /* Borde naranja */
+    color: var(--color-orange) !important;
+    /* Texto naranja */
+    font-weight: 500;
+    /* Grosor de fuente medio */
+    padding: 0.5rem 1.5rem;
+    /* Espaciado interno */
+    border-radius: 4px;
+    /* Bordes ligeramente redondeados */
+    transition: all 0.3s ease;
+    /* Transición suave */
+}
+
+.btn-card-custom:hover,
+.btn-card-custom:focus {
+    background-color: var(--color-orange) !important;
+    /* Fondo naranja al pasar mouse/enfocar */
+    color: white !important;
+    /* Texto blanco al pasar mouse/enfocar */
+    box-shadow: 0 4px 8px rgba(246, 152, 69, 0.3);
+    /* Sombra naranja */
+}

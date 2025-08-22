@@ -1,0 +1,429 @@
+<!-- Declara el tipo de documento como HTML5 -->
+<!DOCTYPE html>
+<!-- Etiqueta raíz del documento, especifica el idioma inglés -->
+<html lang="en">
+
+<head>
+    <!-- Define la codificación de caracteres como UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- Configura la vista para dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título de la página que aparece en la pestaña del navegador -->
+    <title>Análisis</title>
+    <!-- Enlace a la hoja de estilos de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a la hoja de estilos personalizada -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Enlace a los iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <!-- Navbar - Barra de navegación (igual que en index.html) -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/logo.png" alt="Sun Rise Logo" class="d-inline-block align-text-top me-2 logo-img">
+                <span class="brand-text">Sun Rise</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="historia.html">Historia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="datos.html">Datos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Utilidades
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="analisis.html">Calculadora anual KW</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Calculadora instalación paneles</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Paises líderes</a></li>
+                            <li><a class="dropdown-item" href="analisis.html">Costos</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" action="buscar.html" method="get">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-light me-2 nav-btn" type="submit">Buscar</button>
+                    <a href="dashboard.html" class="btn btn-outline-light nav-btn">Dashboard</a>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección principal con dos calculadoras en columnas -->
+    <div class="container my-4">
+        <div class="row">
+            <!-- Columna izquierda: Calculadora de Ahorro Anual -->
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 py-4">
+                <!-- Descripción de la calculadora -->
+                <div class="descripcion_Forms bg-beige rounded-3 p-4 mb-4">
+                    <h2 class="text-center text-brown">¿Cuánto ahorrarías al año usando paneles solares?</h2>
+                    <p class="text-brown">Determina cuánto dinero (COP) podría ahorrar un usuario al año si usa paneles
+                        solares, sin entrar en detalles técnicos complejos.</p>
+                </div>
+                <!-- Formulario de la calculadora -->
+                <div class="contenedorFormulario bg-beige rounded-3 p-4">
+                    <form id="formularioCalculadora" action="">
+                        <!-- Campo para cantidad de KW al mes -->
+                        <div class="mb-3">
+                            <label for="kw" class="form-label text-brown">Cantidad de KW al mes:</label>
+                            <input type="number" class="form-control" id="KW" placeholder="Ej: 150" autofocus>
+                        </div>
+                        <!-- Campo para costo por KW -->
+                        <div class="mb-3">
+                            <label for="costo_kw" class="form-label text-brown">Costo por KW al mes (COP):</label>
+                            <input type="number" class="form-control" id="costo_kw" placeholder="Ej: 850" step="0.01">
+                        </div>
+                        <!-- Botones de acción -->
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-orange">Calcular</button>
+                            <button type="reset" class="btn btn-brown">Limpiar</button>
+                            <!-- Mensaje de error (oculto inicialmente) -->
+                            <p id="mensajeError" class="text-danger"></p>
+                        </div>
+                    </form>
+                    <!-- Contenedor para mostrar resultados -->
+                    <div id="salidaDatos" class="mt-3 p-3 bg-light-brown rounded text-brown fw-bold"
+                        style="display:none;"></div>
+                </div>
+            </div>
+
+            <!-- Columna derecha: Calculadora de Paneles Solares -->
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 py-4">
+                <!-- Descripción de la calculadora -->
+                <div class="descripcion_Forms bg-beige rounded-3 p-4 mb-4">
+                    <h2 class="text-center text-brown">¿Cuántos paneles solares necesitas?</h2>
+                    <p class="text-brown">Determina el número de paneles solares que se deben instalar para que tu hogar
+                        supla su consumo energético.</p>
+                </div>
+                <!-- Formulario de la calculadora -->
+                <div class="contenedorFormulario bg-beige rounded-3 p-4">
+                    <form id="formularioPaneles">
+                        <!-- Campo para consumo eléctrico mensual -->
+                        <div class="mb-3">
+                            <label for="consumoMensual" class="form-label text-brown">Consumo eléctrico mensual
+                                (KWh):</label>
+                            <input type="number" class="form-control" id="consumoMensual" placeholder="Ej: 300"
+                                required>
+                        </div>
+                        <!-- Campo para horas de sol promedio -->
+                        <div class="mb-3">
+                            <label for="horasSol" class="form-label text-brown">Horas de sol promedio al día:</label>
+                            <input type="number" class="form-control" id="horasSol" placeholder="Ej: 4" value=""
+                                required>
+                        </div>
+                        <!-- Campo para potencia de cada panel -->
+                        <div class="mb-3">
+                            <label for="potenciaPanel" class="form-label text-brown">Potencia de cada panel
+                                (Watts):</label>
+                            <input type="number" class="form-control" id="potenciaPanel" placeholder="Ej: 300" value=""
+                                required>
+                        </div>
+                        <!-- Botones de acción -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-orange">Calcular</button>
+                            <button type="reset" class="btn btn-brown">Limpiar</button>
+                            <!-- Mensaje de error (oculto inicialmente) -->
+                            <p id="mensajeErrorPaneles" class="text-danger"></p>
+                        </div>
+                    </form>
+                    <!-- Contenedor para mostrar resultados -->
+                    <div id="salidaPaneles" class="mt-3 p-3 bg-light-brown rounded text-brown fw-bold"
+                        style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Sección: Países Líderes y Políticas que frenan el desarrollo solar -->
+    <div class="container p-5 rounded shadow mt-4 mb-5" style="background-color: #E6D396;">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold">Políticas que han frenado el desarrollo de la Energía Solar</h3>
+        </div>
+
+        <p>
+            Es una realidad que las políticas gubernamentales pueden tanto impulsar como frenar el desarrollo de la
+            energía solar, muchas veces por motivos que van más allá de la
+            viabilidad técnica o económica.
+            A continuación, se presentan ejemplos en los que la intervención política ha tenido un impacto negativo
+            en su implementación.
+        </p>
+
+        <!-- Subsección: España -->
+        <h5 class="mt-4"><strong>España: El "Impuesto al Sol" y la Inestabilidad Regulatoria</strong></h5>
+        <p>
+            Durante la década de 2000, España fue uno de los países líderes en energía solar, gracias al fuerte
+            respaldo gubernamental mediante primas y subvenciones. Este apoyo
+            generó un auge de inversión tanto de
+            grandes empresas como de pequeños inversores particulares. Sin embargo, a partir de 2010, se
+            introdujeron medidas que afectaron gravemente al sector:
+        </p>
+        <ul>
+            <li><strong>Recortes retroactivos a las subvenciones:</strong> El gobierno redujo de forma retroactiva
+                las primas otorgadas, lo que llevó a la quiebra de miles de
+                inversores y empresas que dependían de
+                esos incentivos para garantizar la rentabilidad de sus proyectos.</li>
+            <li><strong>El "Impuesto al Sol":</strong> Se implementó un cargo a la energía autogenerada,
+                desincentivando el autoconsumo y penalizando a quienes producían su propia
+                electricidad. Esta medida fue
+                ampliamente criticada y paralizó el crecimiento del sector durante años.</li>
+            <li><strong>Consecuencias:</strong> Las decisiones regulatorias generaron una fuerte inseguridad
+                jurídica, congelando la inversión en energía solar por casi una década.
+                Aunque posteriormente se derogó
+                el "Impuesto al Sol" y se impulsaron nuevas políticas de apoyo, el daño al sector fue considerable.
+            </li>
+        </ul>
+
+        <!-- Subsección: México -->
+        <h5 class="mt-4"><strong>México: Priorización de Energías Fósiles sobre las Renovables</strong></h5>
+        <p>
+            En México, las decisiones gubernamentales recientes han favorecido a las empresas estatales de energía
+            fósil, como Pemex y la CFE, en detrimento del desarrollo de fuentes
+            renovables como la solar.
+        </p>
+        <ul>
+            <li><strong>Acuerdos regulatorios restrictivos:</strong> En 2020, el gobierno emitió un acuerdo que
+                frenó la entrada en operación de varias plantas solares y eólicas ya
+                construidas, argumentando que su
+                intermitencia ponía en riesgo la confiabilidad del sistema eléctrico.</li>
+            <li><strong>Discurso político:</strong> Estas políticas fueron respaldadas por un discurso de "soberanía
+                energética", privilegiando el control estatal de la generación
+                a través de Pemex y la CFE, y
+                cuestionando a los generadores privados de energía renovable.</li>
+            <li><strong>Impacto:</strong> Las medidas han provocado cancelaciones de inversión, pérdida de confianza
+                en el sector y múltiples demandas legales por parte de empresas
+                y organizaciones que defienden
+                la transición energética.</li>
+        </ul>
+
+        <!-- Subsección: Estados Unidos -->
+        <h5 class="mt-4"><strong>Estados Unidos: Debates Estatales y Presión de los Lobbies</strong></h5>
+        <p>
+            Aunque EE. UU. es un referente en el desarrollo solar, existen casos a nivel estatal donde las políticas
+            locales han limitado su avance.
+        </p>
+        <ul>
+            <li><strong>Reformas en la medición neta (Net Metering):</strong> Esta política permite a los
+                propietarios de paneles solares vender su excedente a la red eléctrica.
+                En varios estados, la presión de
+                compañías eléctricas ha impulsado reformas que reducen las tarifas pagadas por ese excedente,
+                afectando la rentabilidad de los sistemas domésticos.</li>
+            <li><strong>Leyes contra el autoconsumo:</strong> Se han propuesto legislaciones que imponen cargos
+                adicionales o limitaciones al autoconsumo, desincentivando la
+                adopción individual de energía solar.
+                Estas iniciativas suelen estar respaldadas por lobbies de la industria de combustibles fósiles o
+                empresas de servicios públicos tradicionales.</li>
+        </ul>
+
+        <p class="mt-4">
+            Estos ejemplos reflejan cómo la política, la defensa de intereses económicos tradicionales y la falta de
+            visión a largo plazo pueden frenar significativamente
+            el avance de una tecnología clave para
+            la lucha contra el cambio climático.
+        </p>
+    </div>
+
+
+    <!-- Sección: Costos de instalación de energía solar -->
+    <div class="container p-5 rounded shadow mt-4 mb-5" style="background-color: #E6D396;">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold">¿Cuánto cuesta instalar energía solar en casa?</h3>
+        </div>
+
+        <p>
+            El costo de instalar un sistema de energía solar en un hogar puede variar significativamente, ya que
+            depende de múltiples factores. Por lo tanto, cualquier cifra es
+            una estimación y debe ser tomada
+            como una referencia, no como un precio final.
+        </p>
+
+        <!-- Factores que influyen en el costo -->
+        <h5 class="mt-4"><strong>Factores que influyen en el costo</strong></h5>
+        <ul>
+            <li><strong>Tamaño del sistema (en kilovatios, kW):</strong> Este es el factor más importante. El tamaño
+                del sistema se determina por el consumo de energía de tu hogar
+                y la cantidad de sol que recibe tu ubicación.</li>
+            <li><strong>Tipo y calidad de los paneles solares:</strong> Los paneles monocristalinos, más eficientes,
+                son más caros que los policristalinos. Las marcas de alta
+                gama también elevan el precio.</li>
+            <li><strong>Componentes adicionales:</strong> Además de los paneles, se necesita un inversor,
+                estructuras, cableado y posiblemente baterías, lo que puede aumentar
+                significativamente el precio.</li>
+            <li><strong>Mano de obra e instalación:</strong> Varía según la región y la complejidad de la
+                instalación (por ejemplo, el tipo de tejado).</li>
+            <li><strong>Incentivos y subvenciones gubernamentales:</strong> Algunos países o estados ofrecen ayudas
+                que pueden reducir el costo total.</li>
+            <li><strong>Ubicación geográfica:</strong> El costo de la instalación y el precio de la electricidad
+                local influyen en la rentabilidad.</li>
+        </ul>
+
+        <!-- Estimaciones de costos por regiones -->
+        <h5 class="mt-4"><strong>Estimaciones de costos en diferentes regiones</strong></h5>
+        <p>Para dar una idea más concreta, se puede analizar el costo por vatio ($/W) o el costo total del sistema:
+        </p>
+
+        <ul>
+            <li><strong>Estados Unidos:</strong> A partir de 2025, el costo promedio por vatio es de $2.56 antes de
+                incentivos. Un sistema promedio de 11 kW cuesta alrededor
+                de $28,160, pero con el crédito fiscal
+                federal (30%), el precio neto podría reducirse a $19,712. El rango típico total es de $10,290 a
+                $20,580.</li>
+
+            <li><strong>México:</strong>
+                <ul>
+                    <li>Casa pequeña (250 kWh): $30,000 - $50,000 MXN (~$1,666 - $2,777 USD).</li>
+                    <li>Casa mediana (500 kWh): $60,000 - $90,000 MXN (~$3,333 - $5,000 USD).</li>
+                    <li>Casa grande (800+ kWh): más de $100,000 MXN (más de $5,555 USD).</li>
+                </ul>
+            </li>
+
+            <li><strong>Colombia:</strong> Un kit básico con 8 paneles puede costar $4,452 USD. Un sistema completo
+                con baterías puede superar los $10,000 USD.</li>
+        </ul>
+
+        <p class="mt-4">
+            En resumen, el costo es una inversión inicial significativa, pero se amortiza con el tiempo gracias al
+            ahorro en la factura eléctrica. El periodo de recuperación
+            suele estar entre 6 y 8 años.
+            Para obtener cifras precisas, es indispensable solicitar una cotización personalizada a instaladores
+            locales.
+        </p>
+    </div>
+
+    <!-- Sección de Cards de navegación (similar a index.html) -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12 bg-white p-4 rounded infobox">
+
+                <!-- Título de la sección -->
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold">¡Descubre un poco más!</h3>
+                </div>
+
+                <!-- Primera fila de cards -->
+                <div class="row">
+                    <!-- Card 1: Energía Solar -->
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4">
+                        <div class="card m-3 h-100">
+                            <img src="img/energia.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center">Energía Solar</h5>
+                                <p class="card-text">La energía solar es aquella que se obtiene a partir del sol en
+                                    forma de radiación electromagnética (luz, calor y rayos ultravioleta)...</p>
+                                <div class="mt-auto text-center">
+                                    <a href="energia.html" class="btn btn-card-custom">MÁS INFORMACIÓN AQUÍ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Información Histórica -->
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4">
+                        <div class="card m-3 h-100">
+                            <img src="img/historia.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center">Información Histórica</h5>
+                                <p class="card-text">La historia del uso de la energía solar es larga y se remonta a la
+                                    antigüedad...</p>
+                                <div class="mt-auto text-center">
+                                    <a href="historia.html" class="btn btn-card-custom">MÁS INFORMACIÓN AQUÍ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Datos Relevantes -->
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4">
+                        <div class="card m-3 h-100">
+                            <img src="img/datos.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center">Datos Relevantes</h5>
+                                <p class="card-text">Ventajas de la energía solar más destacables: es una fuente de
+                                    energía inagotable, no genera emisiones de CO₂...</p>
+                                <div class="mt-auto text-center">
+                                    <a href="datos.html" class="btn btn-card-custom">MÁS INFORMACIÓN AQUÍ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Segunda fila de cards -->
+                <div class="row justify-content-center">
+                    <!-- Card 4: Acerca del Proyecto -->
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4">
+                        <div class="card m-3 h-100">
+                            <img src="img/acerca.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center">Acerca del Proyecto</h5>
+                                <p class="card-text">El proyecto busca fomentar el uso de energía solar en regiones
+                                    productoras de café como alternativa sostenible...</p>
+                                <div class="mt-auto text-center">
+                                    <a href="acerca.html" class="btn btn-card-custom">MÁS INFORMACIÓN AQUÍ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Contáctanos -->
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4">
+                        <div class="card m-3 h-100">
+                            <img src="img/contactanos.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center">Contáctanos</h5>
+                                <p class="card-text">¿Tienes dudas, sugerencias o te gustaría colaborar? Estamos
+                                    disponibles para atender tus inquietudes...</p>
+                                <div class="mt-auto text-center">
+                                    <a href="contactanos.html" class="btn btn-card-custom">MÁS INFORMACIÓN AQUÍ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+
+    <!-- Footer - Pie de página -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="footer-content">
+                <span>© 2025</span>
+                <img src="img/logo.png" alt="Ícono Footer">
+                <span>Sun Rise. Todos los derechos reservados.</span>
+            </div>
+            <div class="footer-links">
+                <a href="politica_privacidad.html" class="btn-outline-light nav-btn">Política de Privacidad</a>
+                <span>|</span>
+                <a href="terminos_servicio.html" class="btn-outline-light nav-btn">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts adicionales -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script personalizado para las funcionalidades de las calculadoras -->
+    <script src="funcion.js"></script>
+
+</body>
+
+</html>
